@@ -1,21 +1,43 @@
 import java.util.Scanner;
-public class Main 
-{
+
+public class Main {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the number1: ");
-        int a = scanner.nextInt();
-        System.out.print("Enter the number2: ");
-        int b = scanner.nextInt();
-       
-        int sum = a + b;
-        int difference = a - b;
-        int product = a * b;
-        double quotient = (double) a / b;
+        System.out.print("Enter the String: ");
+        String expr= scanner.nextLine();
 
-        System.out.println("Sum: " + sum);
-        System.out.println("Difference: " + difference);
-        System.out.println("Product: " + product);
-        System.out.println("Quotient: " + quotient);
+        char[] operators = {'+', '-', '*', '/'};
+        for (char operator: operators){
+            int i = expr.indexOf(operator);
+            if(i!=-1){
+                try{
+                    int num1 = Integer.parseInt(expr.substring(0,i));
+                    int num2 = Integer.parseInt(expr.substring(i + 1));
+                    int result= 0;
+                    switch (operator) {
+                        case '+':
+                            result = num1 + num2;
+                            break;
+                        case '-':
+                            result = num1 - num2;
+                            break;
+                        case '*':
+                            result = num1 * num2;
+                            break;
+                        case '/': 
+                            if (num2 != 0) {
+                                result = num1 / num2;
+                            } else {
+                                System.out.println("Cannot divide by zero");
+                                continue;
+                            }
+                            break;
+                    }
+                System.out.println("Result: " + result);
+                } catch(Exception e){
+                    System.out.println("Invalid expression") ;
+                }
+            }
+        }
     }
 }
